@@ -31,7 +31,7 @@ export default {
 .page {
   width: 100%;
   height: 100vh;
-  max-width: 700px;
+  max-width: 500px;
 
   margin : 0 auto;
 }
@@ -50,6 +50,31 @@ button {
   border-radius: 15px;
 
   background-color: #00b8d4;
+
+  cursor: pointer;
 }
 
+input {
+  width: 100%;
+
+  color: black;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 2px;
+
+  padding: 18px;
+
+  border: 1px solid #E9E9E9;
+  border-radius: 15px;
+
+  background-color: #E9E9E9;
+}
+
+input:focus {
+  outline: 0px;
+}
+
+input[placeholder] {
+  color: #949494;
+}
 </style>
