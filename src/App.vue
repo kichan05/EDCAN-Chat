@@ -9,12 +9,47 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
 }
+
+:root {
+  --edcan-blue : #00b8d4;
+  --edcan-navy : #455A64;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Pretendard-Regular',serif;
+}
+
+.page {
+  width: 100%;
+  height: 100vh;
+  max-width: 700px;
+
+  margin : 0 auto;
+}
+
+button {
+  width: 100%;
+
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 2px;
+
+  padding: 18px;
+
+  border: 1px solid #00b8d4;
+  border-radius: 15px;
+
+  background-color: #00b8d4;
+}
+
 </style>
