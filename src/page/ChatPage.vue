@@ -7,19 +7,27 @@
 
   <main>
     <div class="chat-list">
-      asdas
+      <ChatItemOther></ChatItemOther>
     </div>
     <div class="chat-input-wrap">
       <input type="text" placeholder="채팅을 입력하세요.">
-      <button>전송</button>
+      <button>
+        <img src="@/assets/send_icon.svg">
+      </button>
     </div>
   </main>
 </div>
 </template>
 
 <script>
+import ChatItemOther from "@/components/ChatItemOther"
+
 export default {
-  name: "ChatPage"
+  name: "ChatPage",
+  components : {
+    ChatItemOther
+  }
+
 }
 </script>
 
@@ -31,8 +39,6 @@ export default {
 header {
   height: 72px;
   padding: 19px 12px;
-
-  background-color: #f00;
 
   display: flex;
   align-items: center;
@@ -76,6 +82,8 @@ main {
 }
 
 .chat-input-wrap button {
+  display: flex;
+  align-items: center;
 }
 
 </style>

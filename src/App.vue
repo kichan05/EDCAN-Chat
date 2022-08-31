@@ -26,6 +26,7 @@ export default {
   padding: 0px;
   box-sizing: border-box;
   font-family: 'Pretendard-Regular',serif;
+  word-break: break-word;
 }
 
 .page {
