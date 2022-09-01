@@ -81,10 +81,10 @@ export default {
 }
 
 .chat-item.other .msg-wrap .time-stamp{
-  margin-left: 6px;
+  margin-left: 7px;
 }
 
 .chat-item.me .msg-wrap .time-stamp{
-  margin-right: 6px;
+  margin-right: 7px;
 }
 </style>

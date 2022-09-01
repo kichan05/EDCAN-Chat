@@ -9,11 +9,11 @@
       <div class="chat-list-wrap">
         <div class="chat-list">
           <ChatItem
-            v-for="i, n in chatDataList"
-            :key="n"
-            :chatData="i"
-            :isMe="i.user == '박희찬'"
-            />
+              v-for="i, n in chatDataList"
+              :key="n"
+              :chatData="i"
+              :isMe="i.user == '박희찬'"
+          />
         </div>
       </div>
       <div class="input-field-wrap">
@@ -21,7 +21,7 @@
           <input type="text" placeholder="채팅을 입력하세요">
         </div>
         <div class="send-button-wrap">
-          <button class="send-btn">
+          <button class="send-btn" @click="sendMsg">
             <img src="@/assets/send_icon.svg" alt="">
           </button>
         </div>
@@ -40,67 +40,183 @@ export default {
       chatDataList: [
         {
           "user": "진다은",
-          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "msg": "대충 채팅",
           "timeStamp": new Date(),
         },
         {
-          "user": "박희찬",
-          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "장인수",
-          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "박희찬",
-          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
-          "timeStamp": new Date(),
-        }, {
           "user": "진다은",
-          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "msg": "대충 채팅",
           "timeStamp": new Date(),
         },
         {
-          "user": "박희찬",
-          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "장인수",
-          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "박희찬",
-          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
-          "timeStamp": new Date(),
-        }, {
           "user": "진다은",
-          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
           "timeStamp": new Date(),
         },
         {
           "user": "박희찬",
-          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "msg": "대충 채팅",
           "timeStamp": new Date(),
         },
         {
-          "user": "장인수",
-          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
           "timeStamp": new Date(),
         },
         {
           "user": "박희찬",
-          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "msg": "대충 채팅",
           "timeStamp": new Date(),
         },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "박희찬",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "진다은",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "박희찬",
+          "msg": "대충 채팅",
+          "timeStamp": new Date(),
+        },
+
       ]
+    }
+  },
+  methods: {
+    sendMsg() {
+      this.chatDataList.push({
+        "user": "박희찬",
+        "msg": "대충 채팅",
+        "timeStamp": new Date(),
+      },)
     }
   },
   components: {
     ChatItem
+  },
+  mounted() {
+    let chatListWrap = document.querySelector(".chat-list-wrap")
+    chatListWrap.scroll(0, 10000000)
   }
 
 }
@@ -155,8 +271,23 @@ main {
   overflow-y: scroll;
 }
 
+.chat-list-wrap::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+.chat-list-wrap::-webkit-scrollbar-thumb {
+  border-radius: 1em;
+  background-color: #A1A1A182;
+  background-clip: padding-box;
+  border: 3px solid transparent;
+}
+
+.chat-list-wrap::-webkit-scrollbar-track {
+
+}
+
 .chat-list {
-  padding : 12px;
+  padding: 12px;
 }
 
 .input-field-wrap {
