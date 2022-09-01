@@ -1,31 +1,57 @@
 <template>
-<div class="page">
-  <header>
-    <img src="@/assets/edcan.svg">
-    <h1>EDCAN Chat</h1>
-  </header>
+  <div class="page">
+    <header>
+      <img src="@/assets/edcan.svg">
+      <h1>EDCAN Chat</h1>
+    </header>
 
-  <main>
-    <div class="chat-list">
-      <ChatItemOther></ChatItemOther>
-    </div>
-    <div class="chat-input-wrap">
-      <input type="text" placeholder="채팅을 입력하세요.">
-      <button>
-        <img src="@/assets/send_icon.svg">
-      </button>
-    </div>
-  </main>
-</div>
+    <main>
+      <div class="chat-list">
+        <ChatItem v-for="i, n in chatDataList" :key="n" :chatData="i" :isMe="'박희찬' == i.user"/>
+      </div>
+      <div class="chat-input-wrap">
+        <input type="text" placeholder="채팅을 입력하세요.">
+        <button>
+          <img src="@/assets/send_icon.svg">
+        </button>
+      </div>
+    </main>
+  </div>
 </template>
 
 <script>
-import ChatItemOther from "@/components/ChatItemOther"
+import ChatItem from "@/components/ChatItem"
 
 export default {
   name: "ChatPage",
-  components : {
-    ChatItemOther
+  data() {
+    return {
+      chatDataList: [
+        {
+          "user": "진다은",
+          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "박희찬",
+          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "장인수",
+          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "박희찬",
+          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "timeStamp": new Date(),
+        },
+      ]
+    }
+  },
+  components: {
+    ChatItem
   }
 
 }
@@ -44,7 +70,7 @@ header {
   align-items: center;
 
   position: fixed;
-  top : 0px;
+  top: 0px;
   left: 0px;
   right: 0px;
 }
@@ -63,7 +89,7 @@ header h1 {
 }
 
 main {
-  flex : 1;
+  flex: 1;
 
   display: flex;
   flex-direction: column;
@@ -78,7 +104,7 @@ main {
 .chat-input-wrap {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap : 8px;
+  gap: 8px;
 }
 
 .chat-input-wrap button {
