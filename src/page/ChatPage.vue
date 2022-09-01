@@ -46,6 +46,44 @@ export default {
           "user": "박희찬",
           "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
           "timeStamp": new Date(),
+        },{
+          "user": "진다은",
+          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "박희찬",
+          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "장인수",
+          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "박희찬",
+          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "timeStamp": new Date(),
+        },{
+          "user": "진다은",
+          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "박희찬",
+          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "장인수",
+          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "timeStamp": new Date(),
+        },
+        {
+          "user": "박희찬",
+          "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
+          "timeStamp": new Date(),
         },
       ]
     }
@@ -65,6 +103,11 @@ export default {
 header {
   height: 72px;
   padding: 19px 12px;
+
+  background: rgba(255, 255, 255, 0.61);
+  backdrop-filter: blur( 5px );
+  -webkit-backdrop-filter: blur( 5px );
+  border-bottom: 1px solid #e8e8e8;
 
   display: flex;
   align-items: center;
