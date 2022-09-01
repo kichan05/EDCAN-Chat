@@ -18,7 +18,7 @@
       </div>
       <div class="input-field-wrap">
         <div class="input-wrap">
-          <input type="text" placeholder="채팅을 입력하세요">
+          <input type="text" placeholder="채팅을 입력하세요" v-model="inputMsg">
         </div>
         <div class="send-button-wrap">
           <button class="send-btn" @click="sendMsg">
@@ -32,183 +32,39 @@
 
 <script>
 import ChatItem from "@/components/ChatItem"
+import { db } from "@/firebase"
+import { collection, addDoc } from "firebase/firestore";
 
 export default {
   name: "ChatPage",
   data() {
     return {
+      inputMsg : "",
       chatDataList: [
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "박희찬",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "박희찬",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "박희찬",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "진다은",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-        {
-          "user": "박희찬",
-          "msg": "대충 채팅",
-          "timeStamp": new Date(),
-        },
-
+        // {
+        //   "user": "진다은",
+        //   "msg": "대충 채팅",
+        //   "timeStamp": new Date(),
+        // }
       ]
     }
   },
   methods: {
-    sendMsg() {
-      this.chatDataList.push({
+    async sendMsg() {
+      if(this.inputMsg === ""){
+        alert("메시지를 입력해주세요.")
+        return
+      }
+
+      this.inputMsg = ""
+
+      const chatRef = await addDoc(collection(db, "chat"), {
         "user": "박희찬",
-        "msg": "대충 채팅",
+        "msg": this.inputMsg,
         "timeStamp": new Date(),
-      },)
+      })
+
+      console.log(`[Chat send success] ${chatRef.id}`)
     }
   },
   components: {
