@@ -6,14 +6,25 @@
     </header>
 
     <main>
-      <div class="chat-list">
-        <ChatItem v-for="i, n in chatDataList" :key="n" :chatData="i" :isMe="'박희찬' == i.user"/>
+      <div class="chat-list-wrap">
+        <div class="chat-list">
+          <ChatItem
+            v-for="i, n in chatDataList"
+            :key="n"
+            :chatData="i"
+            :isMe="i.user == '박희찬'"
+            />
+        </div>
       </div>
-      <div class="chat-input-wrap">
-        <input type="text" placeholder="채팅을 입력하세요.">
-        <button>
-          <img src="@/assets/send_icon.svg">
-        </button>
+      <div class="input-field-wrap">
+        <div class="input-wrap">
+          <input type="text" placeholder="채팅을 입력하세요">
+        </div>
+        <div class="send-button-wrap">
+          <button class="send-btn">
+            <img src="@/assets/send_icon.svg" alt="">
+          </button>
+        </div>
       </div>
     </main>
   </div>
@@ -46,7 +57,7 @@ export default {
           "user": "박희찬",
           "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
           "timeStamp": new Date(),
-        },{
+        }, {
           "user": "진다은",
           "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
           "timeStamp": new Date(),
@@ -65,7 +76,7 @@ export default {
           "user": "박희찬",
           "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
           "timeStamp": new Date(),
-        },{
+        }, {
           "user": "진다은",
           "msg": "대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용 대충 채팅 내용",
           "timeStamp": new Date(),
@@ -97,7 +108,7 @@ export default {
 
 <style scoped>
 .page {
-  display: flex;
+
 }
 
 header {
@@ -105,8 +116,8 @@ header {
   padding: 19px 12px;
 
   background: rgba(255, 255, 255, 0.61);
-  backdrop-filter: blur( 5px );
-  -webkit-backdrop-filter: blur( 5px );
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   border-bottom: 1px solid #e8e8e8;
 
   display: flex;
@@ -132,25 +143,29 @@ header h1 {
 }
 
 main {
-  flex: 1;
+  height: 100vh;
 
-  display: flex;
-  flex-direction: column;
+  padding-top: 72px;
 
-  padding: 72px 12px 16px;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+.chat-list-wrap {
+  overflow-y: scroll;
 }
 
 .chat-list {
-  flex: 1;
+  padding : 12px;
 }
 
-.chat-input-wrap {
+.input-field-wrap {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 8px;
 }
 
-.chat-input-wrap button {
+.send-btn {
   display: flex;
   align-items: center;
 }
