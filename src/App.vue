@@ -75,7 +75,7 @@ input:focus {
   outline: 0px;
 }
 
-input[placeholder] {
+input::placeholder {
   color: #949494;
 }
 </style>

@@ -2,7 +2,7 @@
   <div class="page">
     <header>
       <img src="@/assets/edcan.svg">
-      <h1>EDCAN Chat {{ userName }}</h1>
+      <h1>EDCAN Chat</h1>
     </header>
 
     <main>
@@ -34,12 +34,12 @@
 import ChatItem from "@/components/ChatItem"
 import { db } from "@/firebase"
 import { collection, addDoc } from "firebase/firestore";
+import { mapGetters } from "vuex";
 
 export default {
   name: "ChatPage",
   data() {
     return {
-      userName : "",
       inputMsg : "",
       chatDataList: [
         // {
@@ -50,6 +50,9 @@ export default {
       ]
     }
   },
+  computed : {
+    ...mapGetters(["getUserName"]),
+  },
   methods: {
     async sendMsg() {
       if(this.inputMsg === ""){
@@ -57,11 +60,13 @@ export default {
         return
       }
 
+      const msg = this.inputMsg
+
       this.inputMsg = ""
 
       const chatRef = await addDoc(collection(db, "chat"), {
-        "user": "박희찬",
-        "msg": this.inputMsg,
+        "user": this.getUserName,
+        "msg": msg,
         "timeStamp": new Date(),
       })
 
@@ -71,16 +76,10 @@ export default {
   components: {
     ChatItem
   },
-  created(){
-    this.userName = this.$route.params.userName
-    console.log(this.$route)
-    console.log(this.userName)
-  },
   mounted() {
     let chatListWrap = document.querySelector(".chat-list-wrap")
     chatListWrap.scroll(0, 10000000)
   }
-
 }
 </script>
 

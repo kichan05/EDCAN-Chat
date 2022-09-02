@@ -1,7 +1,6 @@
 <template>
   <div class="page">
     <div class="input-wrap">
-
       <h1 class="title">환영합니다<br>자신의 별명을 입력해주세요.</h1>
 
       <img src="@/assets/welcome.svg" class="welcome-image">
@@ -20,6 +19,8 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex"
+
 export default {
   name: "welcomePage",
   data() {
@@ -27,10 +28,14 @@ export default {
       inputName: ""
     }
   },
+  computed : {
+    ...mapGetters(["getUserName"]),
+  },
   methods: {
+    ...mapMutations(["setUserName"]),
     join() {
-      console.log(this.inputName)
-      this.$router.push({ name: "Chat", params: { userName: this.inputName } })
+      this.setUserName(this.inputName)
+      this.$router.push({name: 'chat'})
     }
   }
 }

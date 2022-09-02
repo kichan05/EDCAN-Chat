@@ -4,14 +4,16 @@ import ChatPage from "@/page/ChatPage"
 
 const routes = [
     {
-        name: "Welcome",
+        name: "welcome",
         path: "/",
         component: WelcomePage,
+        props: true
     },
     {
-        name: "Chat",
+        name: "chat",
         path: "/chat",
         component: ChatPage,
+        props: true
     }
 ];
 
