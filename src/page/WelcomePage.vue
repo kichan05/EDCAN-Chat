@@ -1,35 +1,36 @@
 <template>
-<div class="page">
-  <div class="input-wrap">
+  <div class="page">
+    <div class="input-wrap">
 
-    <h1 class="title">환영합니다<br>자신의 별명을 입력해주세요.</h1>
-    
-    <img src="@/assets/welcome.svg" class="welcome-image">
+      <h1 class="title">환영합니다<br>자신의 별명을 입력해주세요.</h1>
 
-    <div class="meg">별명은 채팅방에서 보이는<br>자신의 이름 입니다.</div>
+      <img src="@/assets/welcome.svg" class="welcome-image">
 
-    <div class="name-input-wrap">
-      <input type="text" placeholder="이름을 입력해주세요" v-model="inputName" class="input-name">
+      <div class="meg">별명은 채팅방에서 보이는<br>자신의 이름 입니다.</div>
+
+      <div class="name-input-wrap">
+        <input type="text" placeholder="이름을 입력해주세요" v-model="inputName" class="input-name">
+      </div>
+
     </div>
-
+    <div class="goto-button-wrap">
+      <button @click="join">접속 하기</button>
+    </div>
   </div>
-  <div class="goto-button-wrap">
-    <button @click="join">접속 하기</button>
-  </div>
-</div>
 </template>
 
 <script>
 export default {
   name: "welcomePage",
-  data(){
+  data() {
     return {
-      inputName : ""
+      inputName: ""
     }
   },
-  methods : {
-    join(){
-      alert(this.inputName)
+  methods: {
+    join() {
+      console.log(this.inputName)
+      this.$router.push({ name: "Chat", params: { userName: this.inputName } })
     }
   }
 }
@@ -57,7 +58,7 @@ input {
 }
 
 .welcome-image {
-  width : 30%;
+  width: 30%;
 
   margin-top: 10px;
 }

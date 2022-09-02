@@ -2,7 +2,7 @@
   <div class="page">
     <header>
       <img src="@/assets/edcan.svg">
-      <h1>EDCAN Chat</h1>
+      <h1>EDCAN Chat {{ userName }}</h1>
     </header>
 
     <main>
@@ -39,6 +39,7 @@ export default {
   name: "ChatPage",
   data() {
     return {
+      userName : "",
       inputMsg : "",
       chatDataList: [
         // {
@@ -69,6 +70,11 @@ export default {
   },
   components: {
     ChatItem
+  },
+  created(){
+    this.userName = this.$route.params.userName
+    console.log(this.$route)
+    console.log(this.userName)
   },
   mounted() {
     let chatListWrap = document.querySelector(".chat-list-wrap")
