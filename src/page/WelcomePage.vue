@@ -10,6 +10,9 @@
       <div class="name-input-wrap">
         <input type="text" placeholder="이름을 입력해주세요" v-model="inputName" class="input-name">
       </div>
+
+      <p class="error-message" :class="{'animation' : errorMessageAnimation}" v-if="errorMessage != ''">{{ errorMessage }}</p>
+
     </div>
 
     <div class="goto-button-wrap">
@@ -26,7 +29,9 @@ export default {
   name: "welcomePage",
   data() {
     return {
-      inputName: ""
+      inputName: "",
+      errorMessage : "",
+      errorMessageAnimation : false
     }
   },
   computed : {
@@ -35,6 +40,17 @@ export default {
   methods: {
     ...mapMutations(["setUserName", "setUserId"]),
     join() {
+      if(this.inputName === ""){
+        this.errorMessageAnimation = true
+
+        setTimeout(()=>{
+          this.errorMessageAnimation = false
+        }, 2000)
+
+        this.errorMessage = "이름을 입력해주세요."
+        return
+      }
+
       let myUuid = uuidv4()
       this.setUserId(myUuid)
 
@@ -83,6 +99,36 @@ input {
   left: 32px;
   right: 32px;
   bottom: 32px;
+}
+
+.goto-button-wrap button {
+  max-width: 500px;
+}
+
+.error-message {
+  color: #fc3e3e;
+  font-size: 24px;
+  font-weight: 600;
+
+  margin-top: 20px;
+}
+
+.error-message.animation {
+  animation-name: error-message;
+  animation-duration: 2000ms;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes error-message {
+  0%, 56% {
+    transform: translateX(-5%);
+  }
+  28%, 86% {
+    transform: translateX(5%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }
 
 </style>
