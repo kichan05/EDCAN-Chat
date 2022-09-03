@@ -62,6 +62,7 @@ export default {
 
       const chatRef = await addDoc(collection(db, "chat"), {
         "user": this.getUserName,
+        "userId" : this.getUserId,
         "msg": msg,
         "timeStamp": new Date(),
         "del" : false
@@ -91,8 +92,6 @@ export default {
       docs.forEach(doc => {
         let data = doc.data()
         data["timeStamp"] = new Date(data["timeStamp"].seconds * 1000)
-
-        console.log(data)
 
         this.chatDataList.push(data)
       })

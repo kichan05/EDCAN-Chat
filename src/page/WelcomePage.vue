@@ -20,6 +20,7 @@
 
 <script>
 import { mapGetters, mapMutations } from "vuex"
+import {v4 as uuidv4} from "uuid"
 
 export default {
   name: "welcomePage",
@@ -32,8 +33,11 @@ export default {
     ...mapGetters(["getUserName"]),
   },
   methods: {
-    ...mapMutations(["setUserName"]),
+    ...mapMutations(["setUserName", "setUserId"]),
     join() {
+      let myUuid = uuidv4()
+      this.setUserId(myUuid)
+
       this.setUserName(this.inputName)
       this.$router.push({name: 'chat'})
     }
