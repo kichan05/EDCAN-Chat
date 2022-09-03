@@ -5,13 +5,17 @@ import {collection, getDocs } from "firebase/firestore";
 const store = createStore({
     state() {
         return {
-            userName: "adsad",
+            userName: null,
+            userId : null,
             chatDataList : [],
         }
     },
     getters: {
         getUserName: function (state) {
             return state.userName
+        },
+        getUserId: function (state) {
+            return state.userId
         },
         getChatDataList(state){
             return state.chatDataList
@@ -20,6 +24,9 @@ const store = createStore({
     mutations: {
         setUserName(state, name) {
             return state.userName = name
+        },
+        setUserId(state, id) {
+            return state.userId = id
         },
         addCharData(state, chatData) {
             chatData["timeStamp"] = new Date(chatData["timeStamp"].seconds * 1000)

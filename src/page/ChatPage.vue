@@ -46,7 +46,7 @@ export default {
     }
   },
   computed : {
-    ...mapGetters(["getUserName", "getChatDataList"]),
+    ...mapGetters(["getUserName", "getChatDataList", "getUserId"]),
   },
   methods: {
     ...mapActions(["getChatDataFirebase"]),
@@ -72,6 +72,11 @@ export default {
   },
   components: {
     ChatItem
+  },
+  beforeMount() {
+    if(this.getUserId === null){
+      this.$router.push({"name" : "welcome"})
+    }
   },
   async mounted() {
     const chatRef = collection(db, "chat")
