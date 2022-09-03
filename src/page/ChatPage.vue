@@ -8,11 +8,12 @@
     <main>
       <div class="chat-list-wrap">
         <div class="chat-list">
+
           <ChatItem
               v-for="i, n in chatDataList"
               :key="n"
               :chatData="i"
-              :isMe="i.user == '박희찬'"
+              :isMe="i.user === getUserName"
           />
         </div>
       </div>
@@ -33,27 +34,22 @@
 <script>
 import ChatItem from "@/components/ChatItem"
 import { db } from "@/firebase"
-import { collection, addDoc } from "firebase/firestore";
-import { mapGetters } from "vuex";
+import { collection, addDoc, onSnapshot, orderBy, query } from "firebase/firestore";
+import {mapGetters, mapActions} from "vuex";
 
 export default {
   name: "ChatPage",
   data() {
     return {
       inputMsg : "",
-      chatDataList: [
-        // {
-        //   "user": "진다은",
-        //   "msg": "대충 채팅",
-        //   "timeStamp": new Date(),
-        // }
-      ]
+      chatDataList : []
     }
   },
   computed : {
-    ...mapGetters(["getUserName"]),
+    ...mapGetters(["getUserName", "getChatDataList"]),
   },
   methods: {
+    ...mapActions(["getChatDataFirebase"]),
     async sendMsg() {
       if(this.inputMsg === ""){
         alert("메시지를 입력해주세요.")
@@ -68,6 +64,7 @@ export default {
         "user": this.getUserName,
         "msg": msg,
         "timeStamp": new Date(),
+        "del" : false
       })
 
       console.log(`[Chat send success] ${chatRef.id}`)
@@ -76,9 +73,29 @@ export default {
   components: {
     ChatItem
   },
-  mounted() {
+  async mounted() {
+    const chatRef = collection(db, "chat")
+    const timeStampOrder = orderBy("timeStamp")
+    // const delFilter = where("del", "==", false)
+
+    const q = query(chatRef, timeStampOrder)
+
+    onSnapshot(q, docs => {
+      this.chatDataList.length = 0
+
+      docs.forEach(doc => {
+        let data = doc.data()
+        data["timeStamp"] = new Date(data["timeStamp"].seconds * 1000)
+
+        console.log(data)
+
+        this.chatDataList.push(data)
+      })
+    })
+
+
     let chatListWrap = document.querySelector(".chat-list-wrap")
-    chatListWrap.scroll(0, 10000000)
+    chatListWrap.scroll(0, 100000000000000)
   }
 }
 </script>

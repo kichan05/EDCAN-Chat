@@ -6,6 +6,7 @@
     <div class="msg-wrap">
       <div class="msg">{{ chatData.msg }}</div>
       <span class="time-stamp">
+<!--        {{ chatData.timeStamp }}-->
         {{ chatData.timeStamp.getHours() }}시 {{ chatData.timeStamp.getMinutes() }}분
       </span>
     </div>
