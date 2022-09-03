@@ -10,8 +10,8 @@
       <div class="name-input-wrap">
         <input type="text" placeholder="이름을 입력해주세요" v-model="inputName" class="input-name">
       </div>
-
     </div>
+
     <div class="goto-button-wrap">
       <button @click="join">접속 하기</button>
     </div>
@@ -48,10 +48,6 @@ export default {
 <style scoped>
 .page {
   padding: 32px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 * {
@@ -80,6 +76,13 @@ input {
 
 .input-name {
   margin-top: 28px;
+}
+
+.goto-button-wrap {
+  position: fixed;
+  left: 32px;
+  right: 32px;
+  bottom: 32px;
 }
 
 </style>
