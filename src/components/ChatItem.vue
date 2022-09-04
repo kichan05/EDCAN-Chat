@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-item" :class="{'me' : isMe, 'other' : !isMe}">
+  <div class="chat-item" v-if="!chatData.del" :class="{'me' : isMe, 'other' : !isMe}">
     <div class="name-wrap">
       <span class="name">{{ chatData.user }}</span>
     </div>

@@ -17,16 +17,16 @@
           />
         </div>
       </div>
-      <div class="input-field-wrap">
+      <form class="input-field-wrap" @submit="sendMsg" action="#">
         <div class="input-wrap">
           <input type="text" placeholder="채팅을 입력하세요" v-model="inputMsg">
         </div>
         <div class="send-button-wrap">
-          <button class="send-btn" @click="sendMsg">
+          <button class="send-btn" type="submit">
             <img src="@/assets/send_icon.svg" alt="">
           </button>
         </div>
-      </div>
+      </form>
     </main>
   </div>
 </template>
@@ -34,7 +34,7 @@
 <script>
 import ChatItem from "@/components/ChatItem"
 import { db } from "@/firebase"
-import { collection, addDoc, onSnapshot, orderBy, query } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import {mapGetters, mapActions} from "vuex";
 
 export default {
@@ -82,7 +82,6 @@ export default {
   async mounted() {
     const chatRef = collection(db, "chat")
     const timeStampOrder = orderBy("timeStamp")
-    // const delFilter = where("del", "==", false)
 
     const q = query(chatRef, timeStampOrder)
 
@@ -94,8 +93,6 @@ export default {
         data["timeStamp"] = new Date(data["timeStamp"].seconds * 1000)
 
         this.chatDataList.push(data)
-
-        console.log(data)
       })
 
       setTimeout(()=>{
