@@ -11,7 +11,11 @@
         <input type="text" placeholder="이름을 입력해주세요" v-model="inputName" class="input-name">
       </div>
 
-      <p class="error-message" :class="{'animation' : errorMessageAnimation}" v-if="errorMessage != ''">{{ errorMessage }}</p>
+      <p class="error-message"
+         :class="{'animation' : errorMessageAnimation}"
+         v-if="errorMessage != ''"
+         @dblclick="adminLogin"
+      >{{ errorMessage }}</p>
 
     </div>
 
@@ -23,8 +27,8 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex"
-import { auth, provider } from "@/firebase";
+import {mapGetters, mapMutations} from "vuex"
+import {auth, provider} from "@/firebase";
 import {GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 
 export default {
@@ -32,20 +36,21 @@ export default {
   data() {
     return {
       inputName: "",
-      errorMessage : "",
-      errorMessageAnimation : false
+      errorMessage: "",
+      errorMessageAnimation: false,
+      loginClick : 0
     }
   },
-  computed : {
+  computed: {
     ...mapGetters(["getUserName", "getUserData", "getIsAdmin"]),
   },
   methods: {
     ...mapMutations(["setUserName", "setUserId", "setUserData", "setToken"]),
     join() {
-      if(this.inputName === ""){
+      if (this.inputName === "") {
         this.errorMessageAnimation = true
 
-        setTimeout(()=>{
+        setTimeout(() => {
           this.errorMessageAnimation = false
         }, 2000)
 
@@ -68,6 +73,12 @@ export default {
 
             this.$router.push({name: 'chat'})
           })
+    },
+    adminLogin(){
+      if(this.loginClick == 2)
+        this.$router.push({'name' : 'admin login'})
+      else
+        this.loginClick += 1
     }
   },
   mounted() {
@@ -138,16 +149,16 @@ input {
 
 .error-message.animation {
   animation-name: error-message;
-  animation-duration: 2000ms;
+  animation-duration: 1000ms;
   animation-timing-function: ease-in-out;
 }
 
 @keyframes error-message {
   0%, 56% {
-    transform: translateX(-5%);
+    transform: translateX(-7%);
   }
   28%, 86% {
-    transform: translateX(5%);
+    transform: translateX(7%);
   }
   100% {
     transform: translateX(0%);

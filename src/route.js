@@ -18,7 +18,7 @@ const routes = [
     },
     {
         name: "admin login",
-        path: "/adminLogin",
+        path: "/login",
         component: AdminLoginPage,
         props: true
     }
