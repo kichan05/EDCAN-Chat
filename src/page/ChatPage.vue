@@ -95,11 +95,20 @@ export default {
 
         this.chatDataList.push(data)
       })
+
+      setTimeout(()=>{
+        let chatListWrap = document.querySelector(".chat-list-wrap")
+        chatListWrap.scroll(0, document.querySelector(".chat-list").scrollHeight)
+      }, 10)
     })
 
-
     let chatListWrap = document.querySelector(".chat-list-wrap")
-    chatListWrap.scroll(0, 100000000000000)
+    chatListWrap.addEventListener("scroll", ()=>{
+      const scrollTop = document.querySelector(".chat-list-wrap").scrollTop
+      const innerHeight = document.querySelector(".chat-list-wrap").height
+      const scrollHeight = document.querySelector(".chat-list").scrollHeight
+      console.log(scrollTop + innerHeight >= scrollHeight)
+    })
   }
 }
 </script>
