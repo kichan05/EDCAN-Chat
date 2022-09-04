@@ -13,7 +13,7 @@
               v-for="i, n in chatDataList"
               :key="n"
               :chatData="i"
-              :isMe="i.user === getUserName"
+              :isMe="i.userId === getUserId"
           />
         </div>
       </div>
