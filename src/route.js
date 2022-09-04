@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import WelcomePage from "@/page/WelcomePage"
 import ChatPage from "@/page/ChatPage"
+import AdminLoginPage from "@/page/AdminLoginPage";
 
 const routes = [
     {
@@ -13,6 +14,12 @@ const routes = [
         name: "chat",
         path: "/chat",
         component: ChatPage,
+        props: true
+    },
+    {
+        name: "admin login",
+        path: "/adminLogin",
+        component: AdminLoginPage,
         props: true
     }
 ];

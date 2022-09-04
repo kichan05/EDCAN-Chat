@@ -34,7 +34,7 @@
 <script>
 import ChatItem from "@/components/ChatItem"
 import { db } from "@/firebase"
-import { collection, addDoc, onSnapshot, orderBy, query, where } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, orderBy, query } from "firebase/firestore";
 import {mapGetters, mapActions} from "vuex";
 
 export default {

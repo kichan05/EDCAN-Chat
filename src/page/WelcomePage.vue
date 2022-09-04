@@ -37,7 +37,7 @@ export default {
     }
   },
   computed : {
-    ...mapGetters(["getUserName", "getUserData"]),
+    ...mapGetters(["getUserName", "getUserData", "getIsAdmin"]),
   },
   methods: {
     ...mapMutations(["setUserName", "setUserId", "setUserData", "setToken"]),

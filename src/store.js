@@ -10,6 +10,8 @@ const store = createStore({
             chatDataList : [],
             userData : null,
             token : null,
+
+            isAdmin : false,
         }
     },
     getters: {
@@ -28,6 +30,9 @@ const store = createStore({
         getToken(state){
             return state.token
         },
+        getIsAdmin(state){
+            return state.isAdmin
+        },
     },
     mutations: {
         setUserName(state, name) {
@@ -45,6 +50,16 @@ const store = createStore({
         },
         setToken(state, token) {
             state.token = token
+        },
+
+        loginAdmin(state, inputPassword){
+            state.isAdmin = inputPassword === process.env.VUE_APP_ADMIN_LOGIN_PASSWORD
+        },
+        setUserAdmin(state) {
+            state.token = true
+        },
+        setUserUnAdmin(state) {
+            state.token = false
         },
     },
     actions: {
