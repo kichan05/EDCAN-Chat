@@ -8,6 +8,7 @@ const store = createStore({
             userName: null,
             userId : null,
             chatDataList : [],
+
         }
     },
     getters: {

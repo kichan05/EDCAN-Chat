@@ -33,7 +33,7 @@
 
 <script>
 import ChatItem from "@/components/ChatItem"
-import { db } from "@/firebase"
+import {auth, db} from "@/firebase"
 import { collection, addDoc, onSnapshot, orderBy, query } from "firebase/firestore";
 import {mapGetters, mapActions} from "vuex";
 
@@ -80,6 +80,8 @@ export default {
     }
   },
   async mounted() {
+    console.log(auth.currentUser)
+
     const chatRef = collection(db, "chat")
     const timeStampOrder = orderBy("timeStamp")
     // const delFilter = where("del", "==", false)
@@ -109,7 +111,7 @@ export default {
       const scrollHeight = document.querySelector(".chat-list").scrollHeight
       console.log(scrollTop + innerHeight >= scrollHeight)
     })
-  }
+  },
 }
 </script>
 

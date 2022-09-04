@@ -24,6 +24,8 @@
 <script>
 import { mapGetters, mapMutations } from "vuex"
 import {v4 as uuidv4} from "uuid"
+import { auth, provider } from "@/firebase";
+import {GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 
 export default {
   name: "welcomePage",
@@ -51,12 +53,24 @@ export default {
         return
       }
 
-      let myUuid = uuidv4()
-      this.setUserId(myUuid)
+      signInWithPopup(auth, provider)
+          .then(result => {
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
 
-      this.setUserName(this.inputName)
-      this.$router.push({name: 'chat'})
+            console.log(token)
+            console.log(result.user)
+
+            let myUuid = uuidv4()
+            this.setUserId(myUuid)
+
+            this.setUserName(this.inputName)
+            this.$router.push({name: 'chat'})
+          })
     }
+  },
+  mounted() {
+    console.log(auth.currentUser)
   }
 }
 </script>
