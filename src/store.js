@@ -8,7 +8,8 @@ const store = createStore({
             userName: null,
             userId : null,
             chatDataList : [],
-
+            userData : null,
+            token : null,
         }
     },
     getters: {
@@ -20,7 +21,13 @@ const store = createStore({
         },
         getChatDataList(state){
             return state.chatDataList
-        }
+        },
+        getUserData(state){
+            return state.userData
+        },
+        getToken(state){
+            return state.token
+        },
     },
     mutations: {
         setUserName(state, name) {
@@ -32,7 +39,13 @@ const store = createStore({
         addCharData(state, chatData) {
             chatData["timeStamp"] = new Date(chatData["timeStamp"].seconds * 1000)
             state.chatDataList.push(chatData)
-        }
+        },
+        setUserData(state, userData) {
+            state.userData = userData
+        },
+        setToken(state, token) {
+            state.token = token
+        },
     },
     actions: {
         async getChatDataFirebase(state) {

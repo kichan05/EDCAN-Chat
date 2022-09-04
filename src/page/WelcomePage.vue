@@ -16,6 +16,7 @@
     </div>
 
     <div class="goto-button-wrap">
+      <p>Google 로그인을 통해서 접속하게 됩니다.</p>
       <button @click="join">접속 하기</button>
     </div>
   </div>
@@ -23,7 +24,6 @@
 
 <script>
 import { mapGetters, mapMutations } from "vuex"
-import {v4 as uuidv4} from "uuid"
 import { auth, provider } from "@/firebase";
 import {GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 
@@ -37,10 +37,10 @@ export default {
     }
   },
   computed : {
-    ...mapGetters(["getUserName"]),
+    ...mapGetters(["getUserName", "getUserData"]),
   },
   methods: {
-    ...mapMutations(["setUserName", "setUserId"]),
+    ...mapMutations(["setUserName", "setUserId", "setUserData", "setToken"]),
     join() {
       if(this.inputName === ""){
         this.errorMessageAnimation = true
@@ -61,16 +61,17 @@ export default {
             console.log(token)
             console.log(result.user)
 
-            let myUuid = uuidv4()
-            this.setUserId(myUuid)
+            this.setToken(token)
+            this.setUserData(result.user)
 
             this.setUserName(this.inputName)
+
             this.$router.push({name: 'chat'})
           })
     }
   },
   mounted() {
-    console.log(auth.currentUser)
+    console.log(this.getUserData)
   }
 }
 </script>
@@ -113,6 +114,14 @@ input {
   left: 32px;
   right: 32px;
   bottom: 32px;
+}
+
+.goto-button-wrap p {
+  color: #8c8c8c;
+  font-size: 20px;
+  font-weight: 500;
+
+  margin-bottom: 12px;
 }
 
 .goto-button-wrap button {

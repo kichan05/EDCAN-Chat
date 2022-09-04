@@ -13,7 +13,7 @@
               v-for="i, n in chatDataList"
               :key="n"
               :chatData="i"
-              :isMe="i.userId === getUserId"
+              :isMe="i.userEmail === getUserData.email"
           />
         </div>
       </div>
@@ -33,7 +33,7 @@
 
 <script>
 import ChatItem from "@/components/ChatItem"
-import {auth, db} from "@/firebase"
+import { db } from "@/firebase"
 import { collection, addDoc, onSnapshot, orderBy, query } from "firebase/firestore";
 import {mapGetters, mapActions} from "vuex";
 
@@ -46,7 +46,7 @@ export default {
     }
   },
   computed : {
-    ...mapGetters(["getUserName", "getChatDataList", "getUserId"]),
+    ...mapGetters(["getUserName", "getChatDataList", "getUserId", "getUserData", "getToken"]),
   },
   methods: {
     ...mapActions(["getChatDataFirebase"]),
@@ -62,10 +62,10 @@ export default {
 
       const chatRef = await addDoc(collection(db, "chat"), {
         "user": this.getUserName,
-        "userId" : this.getUserId,
         "msg": msg,
         "timeStamp": new Date(),
-        "del" : false
+        "del" : false,
+        "userEmail" : this.getUserData.email,
       })
 
       console.log(`[Chat send success] ${chatRef.id}`)
@@ -75,13 +75,11 @@ export default {
     ChatItem
   },
   beforeMount() {
-    if(this.getUserId === null){
+    if(this.getUserData === null){
       this.$router.push({"name" : "welcome"})
     }
   },
   async mounted() {
-    console.log(auth.currentUser)
-
     const chatRef = collection(db, "chat")
     const timeStampOrder = orderBy("timeStamp")
     // const delFilter = where("del", "==", false)
@@ -96,6 +94,8 @@ export default {
         data["timeStamp"] = new Date(data["timeStamp"].seconds * 1000)
 
         this.chatDataList.push(data)
+
+        console.log(data)
       })
 
       setTimeout(()=>{
@@ -104,13 +104,13 @@ export default {
       }, 10)
     })
 
-    let chatListWrap = document.querySelector(".chat-list-wrap")
-    chatListWrap.addEventListener("scroll", ()=>{
-      const scrollTop = document.querySelector(".chat-list-wrap").scrollTop
-      const innerHeight = document.querySelector(".chat-list-wrap").height
-      const scrollHeight = document.querySelector(".chat-list").scrollHeight
-      console.log(scrollTop + innerHeight >= scrollHeight)
-    })
+    // let chatListWrap = document.querySelector(".chat-list-wrap")
+    // chatListWrap.addEventListener("scroll", ()=>{
+    //   const scrollTop = document.querySelector(".chat-list-wrap").scrollTop
+    //   const innerHeight = document.querySelector(".chat-list-wrap").height
+    //   const scrollHeight = document.querySelector(".chat-list").scrollHeight
+    //   console.log(scrollTop + innerHeight >= scrollHeight)
+    // })
   },
 }
 </script>
