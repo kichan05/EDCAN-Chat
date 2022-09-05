@@ -13,11 +13,12 @@
               v-for="i, n in chatDataList"
               :key="n"
               :chatData="i"
-              :isMe="i.userEmail === getUserData.email"
+              :isMe="i.userEmail === getUserEmail"
           />
         </div>
       </div>
-      <form class="input-field-wrap" @submit="sendMsg" action="#">
+
+      <form class="input-field-wrap" @submit="sendMsg" action="" method="" onsubmit="return false">
         <div class="input-wrap">
           <input type="text" placeholder="채팅을 입력하세요" v-model="inputMsg">
         </div>
@@ -33,9 +34,9 @@
 
 <script>
 import ChatItem from "@/components/ChatItem"
-import { db } from "@/firebase"
+import {db} from "@/firebase"
 import { collection, addDoc, onSnapshot, orderBy, query } from "firebase/firestore";
-import {mapGetters, mapActions} from "vuex";
+import {mapGetters, mapActions, mapMutations} from "vuex";
 
 export default {
   name: "ChatPage",
@@ -46,9 +47,10 @@ export default {
     }
   },
   computed : {
-    ...mapGetters(["getUserName", "getChatDataList", "getUserId", "getUserData", "getToken"]),
+    ...mapGetters(["getUserName", "getToken", "getUserEmail"]),
   },
   methods: {
+    ...mapMutations(["setToken"]),
     ...mapActions(["getChatDataFirebase"]),
     async sendMsg() {
       if(this.inputMsg === ""){
@@ -65,17 +67,18 @@ export default {
         "msg": msg,
         "timeStamp": new Date(),
         "del" : false,
-        "userEmail" : this.getUserData.email,
+        "userEmail" : this.getUserEmail,
       })
 
       console.log(`[Chat send success] ${chatRef.id}`)
-    }
+    },
   },
   components: {
     ChatItem
   },
   beforeMount() {
-    if(this.getUserData === null){
+    console.log(this.getUserEmail)
+    if(this.getUserName == null){
       this.$router.push({"name" : "welcome"})
     }
   },
@@ -102,14 +105,6 @@ export default {
         chatListWrap.scroll(0, document.querySelector(".chat-list").scrollHeight)
       }, 10)
     })
-
-    // let chatListWrap = d촘ocument.querySelector(".chat-list-wrap")
-    // chatListWrap.addEventListener("scroll", ()=>{
-    //   const scrollTop = document.querySelector(".chat-list-wrap").scrollTop
-    //   const innerHeight = document.querySelector(".chat-list-wrap").height
-    //   const scrollHeight = document.querySelector(".chat-list").scrollHeight
-    //   console.log(scrollTop + innerHeight >= scrollHeight)
-    // })
   },
 }
 </script>

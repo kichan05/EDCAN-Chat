@@ -28,7 +28,7 @@
 
 <script>
 import {mapGetters, mapMutations} from "vuex"
-import {auth, provider} from "@/firebase";
+import {auth, provider,} from "@/firebase";
 import {GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 
 export default {
@@ -38,14 +38,14 @@ export default {
       inputName: "",
       errorMessage: "",
       errorMessageAnimation: false,
-      loginClick : 0
+      loginClick: 0
     }
   },
   computed: {
-    ...mapGetters(["getUserName", "getUserData", "getIsAdmin"]),
+    ...mapGetters(["getUserName", "getUserEmail" , "getIsAdmin"]),
   },
   methods: {
-    ...mapMutations(["setUserName", "setUserId", "setUserData", "setToken"]),
+    ...mapMutations(["setUserName", "loginUser"]),
     join() {
       if (this.inputName === "") {
         this.errorMessageAnimation = true
@@ -63,20 +63,19 @@ export default {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
 
-            console.log(token)
-            console.log(result.user)
+            let userData = result.user
+            userData["userName"] = this.inputName
 
-            this.setToken(token)
-            this.setUserData(result.user)
+            this.$store.commit("setUserName", userData["userName"])
+            this.$store.commit("setUserEmail", userData["email"])
+            this.$store.commit("setToken", token)
 
-            this.setUserName(this.inputName)
-
-            this.$router.push({name: 'chat'})
+            this.$router.push({"name" : "chat"})
           })
     },
-    adminLogin(){
-      if(this.loginClick == 2)
-        this.$router.push({'name' : 'admin login'})
+    adminLogin() {
+      if (this.loginClick == 2)
+        this.$router.push({'name': 'admin login'})
       else
         this.loginClick += 1
     }

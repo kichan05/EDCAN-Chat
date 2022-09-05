@@ -5,27 +5,19 @@ import {collection, getDocs } from "firebase/firestore";
 const store = createStore({
     state() {
         return {
-            userName: null,
-            userId : null,
-            chatDataList : [],
-            userData : null,
-            token : null,
+            userName: sessionStorage.getItem("userName"),
+            userEmail : sessionStorage.getItem("userEmail"),
+            token : sessionStorage.getItem("token"),
 
-            isAdmin : true,
+            isAdmin : false,
         }
     },
     getters: {
         getUserName: function (state) {
             return state.userName
         },
-        getUserId: function (state) {
-            return state.userId
-        },
-        getChatDataList(state){
-            return state.chatDataList
-        },
-        getUserData(state){
-            return state.userData
+        getUserEmail: function (state) {
+            return state.userEmail
         },
         getToken(state){
             return state.token
@@ -36,19 +28,19 @@ const store = createStore({
     },
     mutations: {
         setUserName(state, name) {
+            sessionStorage.setItem("userName", name)
+            console.log("userName 저장됨 : " + name)
             return state.userName = name
         },
-        setUserId(state, id) {
-            return state.userId = id
-        },
-        addCharData(state, chatData) {
-            chatData["timeStamp"] = new Date(chatData["timeStamp"].seconds * 1000)
-            state.chatDataList.push(chatData)
-        },
-        setUserData(state, userData) {
-            state.userData = userData
+        setUserEmail(state, email) {
+            sessionStorage.setItem("userEmail", email)
+            console.log("userEmail 저장됨 : " + email)
+
+            return state.userEmail = email
         },
         setToken(state, token) {
+            sessionStorage.setItem("token", token)
+            console.log("token 저장됨 : " + token)
             state.token = token
         },
 
