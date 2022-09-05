@@ -90,6 +90,8 @@ export default {
 
       docs.forEach(doc => {
         let data = doc.data()
+
+        data["id"] = doc.id
         data["timeStamp"] = new Date(data["timeStamp"].seconds * 1000)
 
         this.chatDataList.push(data)
@@ -101,7 +103,7 @@ export default {
       }, 10)
     })
 
-    // let chatListWrap = document.querySelector(".chat-list-wrap")
+    // let chatListWrap = d촘ocument.querySelector(".chat-list-wrap")
     // chatListWrap.addEventListener("scroll", ()=>{
     //   const scrollTop = document.querySelector(".chat-list-wrap").scrollTop
     //   const innerHeight = document.querySelector(".chat-list-wrap").height

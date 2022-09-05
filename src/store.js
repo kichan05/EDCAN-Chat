@@ -11,7 +11,7 @@ const store = createStore({
             userData : null,
             token : null,
 
-            isAdmin : false,
+            isAdmin : true,
         }
     },
     getters: {

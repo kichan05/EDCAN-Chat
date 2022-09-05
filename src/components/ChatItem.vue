@@ -1,5 +1,7 @@
 <template>
-  <div class="chat-item" v-if="!chatData.del" :class="{'me' : isMe, 'other' : !isMe}">
+  <div class="chat-item" v-if="!chatData.del"
+       :class="{'me' : isMe, 'other' : !isMe}"
+       @click="adminClick">
     <div class="name-wrap">
       <span class="name">{{ chatData.user }}</span>
     </div>
@@ -10,14 +12,39 @@
       </span>
     </div>
   </div>
+  <AdminMenu v-if="openAdminMenu" :chatData="chatData" @close="openAdminMenu = false"/>
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+import AdminMenu from "@/components/AdminMenu";
+
 export default {
   name: "ChatItem",
-  props : {
-    chatData : Object,
-    isMe : Boolean,
+  data(){
+    return {
+      openAdminMenu : false
+    }
+  },
+  components : {
+    AdminMenu,
+  },
+  props: {
+    chatData: Object,
+    isMe: Boolean,
+  },
+  computed : {
+    ...mapGetters(["getIsAdmin"]),
+  },
+  methods : {
+    adminClick(){
+      if(!this.getIsAdmin){
+        return
+      }
+
+      this.openAdminMenu = true
+
+    }
   }
 }
 </script>
@@ -42,7 +69,7 @@ export default {
 .msg-wrap .msg {
   max-width: 300px;
 
-  color : white;
+  color: white;
   font-size: 15px;
   font-weight: 500;
 
@@ -80,11 +107,11 @@ export default {
   text-align: right;
 }
 
-.chat-item.other .msg-wrap .time-stamp{
+.chat-item.other .msg-wrap .time-stamp {
   margin-left: 7px;
 }
 
-.chat-item.me .msg-wrap .time-stamp{
+.chat-item.me .msg-wrap .time-stamp {
   margin-right: 7px;
 }
 </style>
