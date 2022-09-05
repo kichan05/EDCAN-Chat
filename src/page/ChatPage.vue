@@ -1,8 +1,13 @@
 <template>
   <div class="page">
     <header>
-      <img src="@/assets/edcan.svg">
-      <h1>EDCAN Chat</h1>
+      <div class="left">
+        <img src="@/assets/edcan.svg">
+        <h1>EDCAN Chat</h1>
+      </div>
+      <div class="right" v-if="getIsAdmin" @click="logout">
+        어드민 로그아웃
+      </div>
     </header>
 
     <main>
@@ -47,10 +52,10 @@ export default {
     }
   },
   computed : {
-    ...mapGetters(["getUserName", "getToken", "getUserEmail"]),
+    ...mapGetters(["getUserName", "getToken", "getUserEmail", "getIsAdmin"]),
   },
   methods: {
-    ...mapMutations(["setToken"]),
+    ...mapMutations(["setToken", "setUserUnAdmin"]),
     ...mapActions(["getChatDataFirebase"]),
     async sendMsg() {
       if(this.inputMsg === ""){
@@ -72,6 +77,9 @@ export default {
 
       console.log(`[Chat send success] ${chatRef.id}`)
     },
+    logout(){
+      this.setUserUnAdmin()
+    }
   },
   components: {
     ChatItem
@@ -125,6 +133,7 @@ header {
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   position: fixed;
   top: 0px;
@@ -143,6 +152,14 @@ header h1 {
   margin-left: 16px;
 
   display: inline-block;
+}
+
+header .right{
+  color: #00b8d4;
+  font-size: 20px;
+  font-weight: 700;
+
+  cursor: pointer;
 }
 
 main {

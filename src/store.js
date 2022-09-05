@@ -48,10 +48,10 @@ const store = createStore({
             state.isAdmin = inputPassword === process.env.VUE_APP_ADMIN_LOGIN_PASSWORD
         },
         setUserAdmin(state) {
-            state.token = true
+            state.isAdmin = true
         },
         setUserUnAdmin(state) {
-            state.token = false
+            state.isAdmin = false
         },
     },
     actions: {
