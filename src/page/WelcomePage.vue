@@ -89,6 +89,10 @@ export default {
 <style scoped>
 .page {
   padding: 32px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 * {
@@ -120,10 +124,12 @@ input {
 }
 
 .goto-button-wrap {
-  position: fixed;
-  left: 32px;
-  right: 32px;
-  bottom: 32px;
+
+
+  /*position: absolute;*/
+  /*left: 32px;*/
+  /*right: 32px;*/
+  /*bottom: 32px;*/
 }
 
 .goto-button-wrap p {
