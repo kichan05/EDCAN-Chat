@@ -88,7 +88,7 @@ export default {
 
 <style scoped>
 .page {
-  padding: 32px;
+  padding: 32px 32px 100px;
 
   display: flex;
   flex-direction: column;
