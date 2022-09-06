@@ -4,6 +4,8 @@
   <nav>
     <h3>관리자 메뉴</h3>
 
+    <div class="close-btn" @click.self="$emit('close')">X</div>
+
     <div class="chat-data">
       <div>보낸사람 : {{ chatData.user }} ({{ chatData.userEmail }}) </div>
       <div class="chat-msg">내용 : {{ chatData.msg }} </div>
@@ -93,6 +95,16 @@ nav button {
   font-size: 18px;
 
   margin-top: 24px;
+}
+
+.close-btn {
+  padding: 4px;
+
+  cursor: pointer;
+
+  position: absolute;
+  top: 12px;
+  right: 12px;
 }
 
 

@@ -1,12 +1,11 @@
 <template>
   <div class="chat-item" v-if="!chatData.del"
-       :class="{'me' : isMe, 'other' : !isMe}"
-       @click="adminClick">
+       :class="{'me' : isMe, 'other' : !isMe}">
     <div class="name-wrap">
       <span class="name">{{ chatData.user }}</span>
     </div>
     <div class="msg-wrap">
-      <div class="msg">{{ chatData.msg }}</div>
+      <div class="msg" @dblclick="adminClick">{{ chatData.msg }}</div>
       <span class="time-stamp">
         {{ chatData.timeStamp.getHours() }}시 {{ chatData.timeStamp.getMinutes() }}분
       </span>
@@ -43,7 +42,6 @@ export default {
       }
 
       this.openAdminMenu = true
-
     }
   }
 }
