@@ -154,6 +154,11 @@ header h1 {
   display: inline-block;
 }
 
+header .left {
+  display: flex;
+  align-items: center;
+}
+
 header .right{
   color: #00b8d4;
   font-size: 20px;
@@ -200,9 +205,16 @@ main {
   gap: 8px;
 }
 
+.input-wrap input {
+  font-size: 18px;
+  padding: 12px;
+}
+
 .send-btn {
   display: flex;
   align-items: center;
+
+  padding: 12px;
 }
 
 </style>
