@@ -5,8 +5,9 @@
         <img src="@/assets/edcan.svg">
         <h1>EDCAN Chat</h1>
       </div>
-      <div class="right" v-if="getIsAdmin" @click="logout">
-        어드민 로그아웃
+      <div class="right" v-if="getIsAdmin">
+<!--        <span class="chat-delete" @click="chatDelete">채팅 기록 전체 삭제</span>-->
+        <span class="logout" @click="logout">어드민 로그아웃</span>
       </div>
     </header>
 
@@ -40,25 +41,25 @@
 <script>
 import ChatItem from "@/components/ChatItem"
 import {db} from "@/firebase"
-import { collection, addDoc, onSnapshot, orderBy, query } from "firebase/firestore";
+import {collection, addDoc, onSnapshot, orderBy, query, getDocs, updateDoc} from "firebase/firestore";
 import {mapGetters, mapActions, mapMutations} from "vuex";
 
 export default {
   name: "ChatPage",
   data() {
     return {
-      inputMsg : "",
-      chatDataList : []
+      inputMsg: "",
+      chatDataList: []
     }
   },
-  computed : {
+  computed: {
     ...mapGetters(["getUserName", "getToken", "getUserEmail", "getIsAdmin"]),
   },
   methods: {
     ...mapMutations(["setToken", "setUserUnAdmin"]),
     ...mapActions(["getChatDataFirebase"]),
     async sendMsg() {
-      if(this.inputMsg === ""){
+      if (this.inputMsg === "") {
         alert("메시지를 입력해주세요.")
         return
       }
@@ -71,14 +72,33 @@ export default {
         "user": this.getUserName,
         "msg": msg,
         "timeStamp": new Date(),
-        "del" : false,
-        "userEmail" : this.getUserEmail,
+        "del": false,
+        "userEmail": this.getUserEmail,
       })
 
       console.log(`[Chat send success] ${chatRef.id}`)
     },
-    logout(){
-      this.setUserUnAdmin()
+    logout() {
+      const result = confirm("로그아웃 하시겠습니까?")
+
+      if (result) {
+        this.setUserUnAdmin()
+      }
+    },
+    async chatDelete() {
+      const result = confirm("전체 대이터를 삭제 하시겠습니까?")
+
+      if (result) {
+        const chatRef = collection(db, "chat")
+        const docs = await getDocs(chatRef).then()
+
+        docs.forEach((doc)=>{
+          console.log(doc.data()["msg"])
+          updateDoc(doc, {
+            "del" : true,
+          })
+        })
+      }
     }
   },
   components: {
@@ -86,8 +106,8 @@ export default {
   },
   beforeMount() {
     console.log(this.getUserEmail)
-    if(this.getUserName == null){
-      this.$router.push({"name" : "welcome"})
+    if (this.getUserName == null) {
+      this.$router.push({"name": "welcome"})
     }
   },
   async mounted() {
@@ -108,7 +128,7 @@ export default {
         this.chatDataList.push(data)
       })
 
-      setTimeout(()=>{
+      setTimeout(() => {
         let chatListWrap = document.querySelector(".chat-list-wrap")
         chatListWrap.scroll(0, document.querySelector(".chat-list").scrollHeight)
       }, 10)
@@ -159,12 +179,18 @@ header .left {
   align-items: center;
 }
 
-header .right{
+header .right * {
   color: #00b8d4;
   font-size: 20px;
   font-weight: 700;
 
+  margin-left: 12px;
+
   cursor: pointer;
+}
+
+header .right .chat-delete {
+  color: #d40000;
 }
 
 main {
